@@ -44,3 +44,17 @@ print(df_full.describe(include = 'O'))
 import pandas_profiling as pdp
 profile = pdp.ProfileReport(train)
 profile.to_file("./tmp/test.html")
+
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import seaborn as sns
+import japanize_matplotlib
+
+sns.countplot(x='Survived', data=train)
+plt.title('死亡者と生存者の数')
+plt.xticks([0,1],['死亡者','生存者'])
+plt.show()
+
+display(train['Survived'].value_counts())
+
+display(train['Survived'].value_counts()/len(train['Survived']))

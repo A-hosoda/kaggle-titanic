@@ -45,3 +45,19 @@ import matplotlib.pyplot as plt
 plt.plot(evals_result['training']['binary_logloss'], label='train_loss')
 plt.plot(evals_result['valid_1']['binary_logloss'], label='valid_loss')
 plt.legend()
+#plt.show()
+
+test_pred = (gbm.predict(test) > 0.5).astype(int)
+
+print(test_pred)
+
+
+sample_submission = pd.read_csv('../input/test.csv') 
+test_pred = pd.DataFrame(data=test_pred, columns=['Survived'])
+sample_submission = pd.concat([sample_submission, test_pred], axis = 1)
+
+sample_submission = sample_submission.drop(['Age', 'Pclass', 'Name', 'Sex', 'SibSp', 'Parch', 'Ticket', 'Fare', 'Cabin', 'Embarked'], axis=1)
+
+print(sample_submission.head())
+
+sample_submission.to_csv('train_test_split.csv', index=False)
