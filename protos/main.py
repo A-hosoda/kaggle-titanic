@@ -41,5 +41,6 @@ print(df_full.describe(percentiles=[.1,.2,.3,.4,.5,.6,.7,.8,.9]))
 print('-'*10)
 print(df_full.describe(include = 'O'))
 
-#import pandas_profiling as pdp
-#pdp.ProfileReport(train)
+import pandas_profiling as pdp
+profile = pdp.ProfileReport(train)
+profile.to_file("./tmp/test.html")
